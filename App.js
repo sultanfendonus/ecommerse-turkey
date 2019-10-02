@@ -10,14 +10,26 @@ import CartScreen from './src/screen/CartScreen';
 import AccountScreen from './src/screen/AccountScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { setNavigator } from './src/navigationRef';
+import { FontAwesome } from '@expo/vector-icons';
+import AutoLogin from './src/screen/AutoLogin';
+
+const HomeScreenFlow = createStackNavigator({
+    Home : HomeScreen,
+});
+
+HomeScreenFlow.navigationOptions = {
+  title: 'Home',
+  tabBarIcon: <FontAwesome name="home" size={20} />
+};
 
 const switchNavigator = createSwitchNavigator({
+  AutoLogin : AutoLogin,
   loginFlow: createStackNavigator({
     SignIn : SignIn,
     SignUp : SignUp
   }),
   mainFlow: createBottomTabNavigator({
-    Home : HomeScreen,
+    HomeScreenFlow,
     Cart : CartScreen,
     Account : AccountScreen
   })
