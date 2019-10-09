@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet,FlatList } from 'react-native'
 
-const ProductOptionColors = () => {
+const ProductOptionVeriant = () => {
 
     const item = [{
             id : 1,
@@ -32,7 +32,7 @@ const ProductOptionColors = () => {
 
     return (
         <View>
-            <Text style = {styles.mainTitle}>Colors : </Text>
+            <Text style = {styles.mainTitle}>Size : </Text>
 
             <FlatList
                 horizontal
@@ -41,7 +41,9 @@ const ProductOptionColors = () => {
                 data={item}
                 keyExtractor={(item, index) => item.id.toString()}
                 renderItem={({ item }) => {
-                return <View style = {{backgroundColor : item.Colors, width : 50, height : 50, marginRight : 5}}></View>
+                return <View style = {{borderWidth : 1, borderColor : 'black',padding : 15, marginRight : 5}}>
+                    <Text>S</Text>
+                </View>
                 }}
             />
         </View>
@@ -56,4 +58,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ProductOptionColors
+export default ProductOptionVeriant
