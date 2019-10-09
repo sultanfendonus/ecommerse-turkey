@@ -1,19 +1,57 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const PriceDiscountAndFavTab = () => {
+const PriceDiscountAndFavTab = ({discount,discount_price,price,discount_type,shipping_type}) => {
+
+    const mainPriceView = ()=> {
+        if(discount===0){
+            return price
+        }else{
+            return discount_price
+        }
+    }
+
+    const discountViewer = ()=> {
+        if(discount>0 && discount_type==='percent'){
+            return(
+                <View style = {{flexDirection : "row"}}>
+                <Text style = {styles.discountTextwithPrice}>US ${price} </Text>
+                <Text style = {styles.discount}>-{discount}%</Text>
+                </View>
+            )
+        }else if(discount>0 && discount_type==='amount'){
+            return(
+                <View style = {{flexDirection : "row"}}>
+                <Text style = {styles.discountTextwithPrice}>US ${price} </Text>
+                <Text style = {styles.discount}>-{discount}$</Text>
+                </View>
+            )
+            
+        }else{
+            return;
+        }
+        
+
+    }
+
+    const renderShipingType = ()=> {
+        if(shipping_type==='free'){
+            return 'Free Shiping'
+        }else{
+            return;
+        }
+        
+    }
+
     return (
         <View style = {styles.container}>
             <View style = {styles.PriceAndDiscount}>
-                <Text style = {styles.priceText}>US $7.79</Text>
-                <View style = {{flexDirection : "row"}}>
-                    <Text style = {styles.discountTextwithPrice}>US $7.79 </Text>
-                    <Text style = {styles.discount}>-61%</Text>
-                </View>
+                <Text style = {styles.priceText}>US ${mainPriceView()}</Text>
+               {discountViewer()}
                 
             </View>
             <View style = {styles.favouriteTab}>
-                <Text>Love me</Text>
+                <Text style={{color : 'white'}}>{renderShipingType()}</Text>
             </View>
         </View>
     )

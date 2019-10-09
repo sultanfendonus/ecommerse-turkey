@@ -14,10 +14,17 @@ import { setNavigator } from './src/navigationRef';
 import { FontAwesome } from '@expo/vector-icons';
 import AutoLogin from './src/screen/AutoLogin';
 import ProductDetailsScreen from './src/screen/ProductDetailsScreen';
+import ProductOptionScreen from './src/screen/ProductOptionScreen';
+
+
+// const ProductFlow = createStackNavigator({
+  
+// })
 
 const HomeScreenFlow = createStackNavigator({
     Home : HomeScreen,
-    ProductDetails : ProductDetailsScreen
+    ProductDetails : ProductDetailsScreen,
+  ProductOption : ProductOptionScreen
 });
 
 

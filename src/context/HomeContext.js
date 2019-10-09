@@ -34,7 +34,7 @@ const getAllProducts = dispatch => async (auth) => {
   const getSingleProductWithDescriptions = dispatch => async (auth) => {
     try {
         const response = await shopApi.post('/product/single-product',{email : auth.email, api_token : auth.api_token, product_id: auth.id})
-        console.log(response.data);
+        console.log(response.data.choice_options);
         dispatch({type : 'single_Product',payload : response.data})
 
     } catch (err) {

@@ -5,6 +5,9 @@ import { Context as HomeContext } from '../context/HomeContext';
 import { Context as AuthContext } from '../context/AuthContext';
 import BuyOrCartTab from '../components/BuyOrCartTab';
 import PriceDiscountAndFavTab from '../components/PriceDiscountAndFavTab';
+import ProductTitleAndNumOfOrderTab from '../components/ProductTitleAndNumOfOrderTab';
+import ProductDiscription from '../components/ProductDiscription';
+import ProductBasicInfo from '../components/ProductBasicInfo';
 
 
 const ProductDetailsScreen = ({navigation}) => {
@@ -30,12 +33,30 @@ const ProductDetailsScreen = ({navigation}) => {
                     style = {styles.ProductImage}
                     imageData = {singleProduct.photos}
                 />
-                <PriceDiscountAndFavTab />
+                <PriceDiscountAndFavTab
+                    discount = {singleProduct.discount}
+                    discount_price = {singleProduct.discount_price}
+                    price = {singleProduct.price}
+                    discount_type = {singleProduct.discount_type}
+                    shipping_type = {singleProduct.shipping_type}
+                />
+                <ProductTitleAndNumOfOrderTab
+                    name = {singleProduct.name}
+                    numOfSell = {singleProduct.num_of_sale}
+                />
+                <ProductBasicInfo 
+                    singleProduct = {singleProduct}
+                />
+                <ProductDiscription
+                htmlContent = {singleProduct.description}
+                />
 
             </ScrollView>
             
 
             <BuyOrCartTab
+            navigation={navigation}
+            
             style = {styles.buyorcart}
             />
         </View>

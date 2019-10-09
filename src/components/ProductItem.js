@@ -7,7 +7,7 @@ const ProductItem = ({result}) => {
             <View style={styles.container}>
             <View >
                 <Image style={styles.image} source={{ uri: result.featured_img }} />
-                <Text style={styles.name}>{result.name}</Text>
+                <Text numberOfLines= {2} style={styles.name}>{result.name}</Text>
                 <Text>
                      {result.unit_price}$/{result.unit}
                 </Text>
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
         marginBottom: 5
       },
       name: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginRight: 15
       },
       imageThumbnail: {
         justifyContent: 'center',
