@@ -9,7 +9,7 @@ const ProductImages = ({imageData}) => {
         'https://source.unsplash.com/1024x768/?girl',
         'https://source.unsplash.com/1024x768/?tree'
         ];
-        console.log(imageData)
+        //console.log(imageData)
     return (
         <View style={styles.slider}>
              <SliderBox

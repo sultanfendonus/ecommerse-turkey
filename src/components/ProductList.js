@@ -11,7 +11,6 @@ import ProductItem from './ProductItem';
 
 const ProductList = ({ title, results, navigation }) => {
   if (!results.length) {
-    console.log(results.length)
     return null;
   }
 

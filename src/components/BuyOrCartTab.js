@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-const BuyOrCartTab = ({navigation}) => {
+const BuyOrCartTab = ({navigation,singleProduct}) => {
     return (
         <View style={styles.container}>
             <View style={styles.cart}>
@@ -9,7 +9,7 @@ const BuyOrCartTab = ({navigation}) => {
 
             </View>
 
-            <TouchableOpacity onPress={()=>navigation.navigate('ProductOption')} style={styles.buy}>
+            <TouchableOpacity onPress={()=>navigation.navigate('ProductOption',{singleProduct})} style={styles.buy}>
                 <Text style = {styles.buyText}>Buy Now</Text>
 
             </TouchableOpacity>

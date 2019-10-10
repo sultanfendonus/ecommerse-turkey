@@ -1,18 +1,18 @@
 import React from 'react'
 import { View, Text, StyleSheet,Image } from 'react-native'
 
-const ProductOptionTitleAndEstPrice = () => {
+const ProductOptionTitleAndEstPrice = ({featured_image, title, price}) => {
     return (
         <View style={styles.container}>
             <View>
             <Image
                 style={styles.image}
-                source={require('../../assets/profile.jpg')}
+                source={{uri : featured_image}}
                 />
             </View>
             <View style={styles.titleAndPriceContainer}>
-                <Text style = {styles.title} numberOfLines = {2}>Best Hot Products in the Year of 2019 is the best.</Text>
-                <Text style = {styles.price}>US $201 - $220</Text>
+                <Text style = {styles.title} numberOfLines = {2}>{title}</Text>
+                <Text style = {styles.price}>US {price}</Text>
             </View>
         </View>
     )

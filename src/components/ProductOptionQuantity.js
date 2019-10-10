@@ -1,22 +1,25 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View, Text, StyleSheet,TouchableOpacity,Image } from 'react-native'
 import {AntDesign} from '@expo/vector-icons'
 
 const ProductOptionQuantity = () => {
 
+    const [quantityValue,setQuantityValue] = useState(1)
 
     return (
         <View>
             <Text style = {styles.mainTitle}>Quantity : </Text>
 
             <View style = {{flexDirection : 'row', margin : 5}}>
-                <TouchableOpacity>
+
+                {/* Here I used Ternary operator . I use the coditon so that quantityValue naver been a negative value. */}
+                <TouchableOpacity onPress={()=>setQuantityValue(quantityValue===0 ? quantityValue : quantityValue-1)}>
                     <AntDesign name="minuscircleo" style={styles.iconStyle} />
                 </TouchableOpacity>
 
-                <Text style = {{fontSize : 28, paddingHorizontal:10}}>0</Text>
+                <Text style = {{fontSize : 28, paddingHorizontal:10}}>{quantityValue}</Text>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>setQuantityValue(quantityValue+1)}>
                     <AntDesign name="pluscircleo" style={styles.iconStyle} />
                 </TouchableOpacity>
             </View>

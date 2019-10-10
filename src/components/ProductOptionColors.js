@@ -1,47 +1,38 @@
-import React from 'react'
-import { View, Text, StyleSheet,FlatList } from 'react-native'
+import React,{useState} from 'react'
+import { View, Text, StyleSheet,FlatList, TouchableOpacity } from 'react-native'
+import {Entypo} from '@expo/vector-icons'
 
-const ProductOptionColors = () => {
+const ProductOptionColors = ({colors}) => {
 
-    const item = [{
-            id : 1,
-            Colors : '#263238'
-        },
-        {
-            id : 2,
-            Colors : '#455A64'
-        },
-        {
-            id : 3,
-            Colors : '#607D8B'
-        },
-        {
-            id : 4,
-            Colors : '#263238'
-        },
-        {
-            id : 5,
-            Colors : '#455A64'
-        },
-        {
-            id : 6,
-            Colors : '#607D8B'
+    const [selectedColor, setselectedColor] = useState("");
+    
+
+    const colorSelector = (item)=>{
+        if(selectedColor === item.name){
+            return <TouchableOpacity style = {{backgroundColor : item.code, width : 50, height : 50, marginRight : 5,borderWidth : 2, borderColor : 'red', padding: 5}}>
+                    <Entypo name="check" style={styles.iconStyle} />
+            </TouchableOpacity>
+        }else{
+            return <TouchableOpacity onPress={()=>setselectedColor(item.name)} style = {{backgroundColor : item.code, width : 50, height : 50, marginRight : 5}}></TouchableOpacity>
+
         }
-    ]   
+        
+    }
 
 
     return (
         <View>
-            <Text style = {styles.mainTitle}>Colors : </Text>
+            <Text style = {styles.mainTitle}>Colors : {selectedColor}</Text>
 
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator = {false}
                 marginTop = {10}
-                data={item}
-                keyExtractor={(item, index) => item.id.toString()}
+                extraData={useState()}
+                data={colors}
+                keyExtractor={(item, index) => item.name.toString()}
                 renderItem={({ item }) => {
-                return <View style = {{backgroundColor : item.Colors, width : 50, height : 50, marginRight : 5}}></View>
+                    return colorSelector(item);
                 }}
             />
         </View>
@@ -53,6 +44,11 @@ const styles = StyleSheet.create({
         fontWeight : "bold" , 
         fontSize : 22, 
         marginTop : 10
+    },
+    iconStyle:{
+        fontSize: 35,
+        alignSelf: 'center',
+        color : "white"
     }
 })
 

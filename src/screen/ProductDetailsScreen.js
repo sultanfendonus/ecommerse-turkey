@@ -56,6 +56,7 @@ const ProductDetailsScreen = ({navigation}) => {
 
             <BuyOrCartTab
             navigation={navigation}
+            singleProduct = {singleProduct}
             
             style = {styles.buyorcart}
             />

@@ -10,7 +10,7 @@ const ProductBasicInfo = ({singleProduct}) => {
             <TableCell title = 'Product Code' child= {singleProduct.code} />
             <TableCell title = 'Product Unit' child= {singleProduct.unit} />
             <TableCell title = 'Brand' child= {singleProduct.brand_name} />
-            <TableCell title = 'Colors' child= {singleProduct.colors.join(", ")} />
+            <TableCell title = 'Colors' child= {singleProduct.colors.map(arr => arr.name).join(", ")} />
             <TableCell title = 'Variation' child= {singleProduct.choice_options.map(arr => arr.title).join(", ")} />
         </View>
     )

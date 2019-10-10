@@ -1,49 +1,48 @@
-import React from 'react'
-import { View, Text, StyleSheet,FlatList } from 'react-native'
+import React,{useState} from 'react'
+import { View, Text, StyleSheet,FlatList,TouchableOpacity } from 'react-native'
 
-const ProductOptionVeriant = () => {
+const ProductOptionVeriant = ({item, title}) => {
 
-    const item = [{
-            id : 1,
-            Colors : '#263238'
-        },
-        {
-            id : 2,
-            Colors : '#455A64'
-        },
-        {
-            id : 3,
-            Colors : '#607D8B'
-        },
-        {
-            id : 4,
-            Colors : '#263238'
-        },
-        {
-            id : 5,
-            Colors : '#455A64'
-        },
-        {
-            id : 6,
-            Colors : '#607D8B'
+    const [selectedVeriant, setSelectedVeriant] = useState('');
+
+    //console.log(item)
+
+    const veriantSelector = (item,index)=>{
+        if(selectedVeriant===item){
+            return(
+                <TouchableOpacity onPress={()=>{
+                    setSelectedVeriant(item)
+                }} style = {{borderWidth : 1, borderColor : 'red',padding : 15, marginRight : 5}}>
+                <Text>{item}</Text>
+            </TouchableOpacity>
+            ) 
+        }else{
+            return(
+                <TouchableOpacity onPress={()=>{
+                    setSelectedVeriant(item)
+                }} style = {{borderWidth : 1, borderColor : 'black',padding : 15, marginRight : 5}}>
+                <Text>{item}</Text>
+            </TouchableOpacity>
+            ) 
+
         }
-    ]   
-
+        
+    }
 
     return (
         <View>
-            <Text style = {styles.mainTitle}>Size : </Text>
+            <Text style = {styles.mainTitle}>{title} : {selectedVeriant}</Text>
 
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator = {false}
                 marginTop = {10}
                 data={item}
-                keyExtractor={(item, index) => item.id.toString()}
-                renderItem={({ item }) => {
-                return <View style = {{borderWidth : 1, borderColor : 'black',padding : 15, marginRight : 5}}>
-                    <Text>S</Text>
-                </View>
+                extraData = {useState()}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={( {item, index} ) => {
+                return veriantSelector(item,index);
+                 
                 }}
             />
         </View>
