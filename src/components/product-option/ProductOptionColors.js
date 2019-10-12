@@ -1,10 +1,13 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { View, Text, StyleSheet,FlatList, TouchableOpacity } from 'react-native'
 import {Entypo} from '@expo/vector-icons'
+import { Context } from '../../context/HomeContext';
 
 const ProductOptionColors = ({colors}) => {
 
     const [selectedColor, setselectedColor] = useState("");
+
+    const { setUserChoise } = useContext(Context);
     
 
     const colorSelector = (item)=>{
@@ -13,7 +16,10 @@ const ProductOptionColors = ({colors}) => {
                     <Entypo name="check" style={styles.iconStyle} />
             </TouchableOpacity>
         }else{
-            return <TouchableOpacity onPress={()=>setselectedColor(item.name)} style = {{backgroundColor : item.code, width : 50, height : 50, marginRight : 5}}></TouchableOpacity>
+            return <TouchableOpacity onPress={()=>{
+                setselectedColor(item.name)
+                //setUserChoise('acolor', item.name)
+            }} style = {{backgroundColor : item.code, width : 50, height : 50, marginRight : 5}}></TouchableOpacity>
 
         }
         

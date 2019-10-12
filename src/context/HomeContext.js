@@ -10,7 +10,10 @@ const homeReducer = (state, action) => {
      return {products : action.payload};
 
      case 'single_Product' : 
-     return {...state,singleProduct : action.payload};
+     return {...state, singleProduct : action.payload};
+
+     case 'choose_product' : 
+     return {...state, chooseOption: { ...state.chooseOption, [action.payload.name]:action.payload.choise}};
 
     default:
       return state;
@@ -35,7 +38,7 @@ const getAllProducts = dispatch => async (auth) => {
     try {
         const response = await shopApi.post('/product/single-product',{email : auth.email, api_token : auth.api_token, product_id: auth.id})
         //console.log(response.data.choice_options);
-        //console.log(response.data.colors);
+        console.log(response.data);
         dispatch({type : 'single_Product',payload : response.data})
 
     } catch (err) {
@@ -45,8 +48,15 @@ const getAllProducts = dispatch => async (auth) => {
     
   }
 
+
+  const setUserChoise = dispatch => async (name,choise) => {
+
+    dispatch({type : 'choose_product',payload : {name : name, choise : choise }})
+  }
+
+
 export const { Provider, Context } = createDataContext(
   homeReducer,
-  { getAllProducts, getSingleProductWithDescriptions },
-  { products : [], singleProduct : null }
+  { getAllProducts, getSingleProductWithDescriptions, setUserChoise },
+  { products : [], singleProduct : null, chooseOption : null }
 );

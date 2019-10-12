@@ -1,11 +1,13 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { View, Text, StyleSheet,FlatList,TouchableOpacity } from 'react-native'
+import { Context } from '../../context/HomeContext';
 
-const ProductOptionVeriant = ({item, title}) => {
+const ProductOptionVeriant = ({item, title, name}) => {
 
     const [selectedVeriant, setSelectedVeriant] = useState('');
+    const { setUserChoise } = useContext(Context);
 
-    //console.log(item)
+    //console.log(name)
 
     const veriantSelector = (item,index)=>{
         if(selectedVeriant===item){
@@ -20,6 +22,7 @@ const ProductOptionVeriant = ({item, title}) => {
             return(
                 <TouchableOpacity onPress={()=>{
                     setSelectedVeriant(item)
+                    setUserChoise(name , item)
                 }} style = {{borderWidth : 1, borderColor : 'black',padding : 15, marginRight : 5}}>
                 <Text>{item}</Text>
             </TouchableOpacity>
