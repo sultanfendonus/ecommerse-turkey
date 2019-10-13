@@ -7,7 +7,7 @@ const ProductOptionColors = ({colors}) => {
 
     const [selectedColor, setselectedColor] = useState("");
 
-    const { setUserChoise } = useContext(Context);
+    const { setUserChoiseColor } = useContext(Context);
     
 
     const colorSelector = (item)=>{
@@ -18,7 +18,7 @@ const ProductOptionColors = ({colors}) => {
         }else{
             return <TouchableOpacity onPress={()=>{
                 setselectedColor(item.name)
-                //setUserChoise('acolor', item.name)
+                setUserChoiseColor({'color': item.name})
             }} style = {{backgroundColor : item.code, width : 50, height : 50, marginRight : 5}}></TouchableOpacity>
 
         }

@@ -15,6 +15,12 @@ const homeReducer = (state, action) => {
      case 'choose_product' : 
      return {...state, chooseOption: { ...state.chooseOption, [action.payload.name]:action.payload.choise}};
 
+     case 'choose_color' : 
+     return {...state, chooseColor: action.payload};
+
+     case 'clear_choose' : 
+     return {...state, chooseOption : action.payload, chooseColor : action.payload};
+
     default:
       return state;
   }
@@ -54,9 +60,20 @@ const getAllProducts = dispatch => async (auth) => {
     dispatch({type : 'choose_product',payload : {name : name, choise : choise }})
   }
 
+  const setUserChoiseColor = dispatch => async (choise) => {
+
+    dispatch({type : 'choose_color',payload : choise})
+  }
+
+  const clearChoose = dispatch => async () => {
+
+    dispatch({type : 'clear_choose', payload : {}})
+  }
+
+
 
 export const { Provider, Context } = createDataContext(
   homeReducer,
-  { getAllProducts, getSingleProductWithDescriptions, setUserChoise },
-  { products : [], singleProduct : null, chooseOption : null }
+  { getAllProducts, getSingleProductWithDescriptions, setUserChoise, setUserChoiseColor,clearChoose },
+  { products : [], singleProduct : null, chooseOption : null, chooseColor : null }
 );

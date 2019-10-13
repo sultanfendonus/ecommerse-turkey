@@ -13,11 +13,14 @@ import ProductBasicInfo from '../components/ProductBasicInfo';
 const ProductDetailsScreen = ({navigation}) => {
 
     const { state } = useContext(AuthContext);
-    const { state: {singleProduct}, getSingleProductWithDescriptions } = useContext(HomeContext);
+    const { state: {singleProduct}, getSingleProductWithDescriptions, clearChoose } = useContext(HomeContext);
 
     useEffect(()=>{
         getSingleProductWithDescriptions({email : state.email, api_token : state.token, id: navigation.getParam('id')});
+        clearChoose();
     },[])
+
+    
 
     if(singleProduct===undefined){
         return(
