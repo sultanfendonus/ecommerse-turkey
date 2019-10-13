@@ -11,10 +11,12 @@ import AccountScreen from './src/screen/AccountScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as HomeProvider } from './src/context/HomeContext';
 import { setNavigator } from './src/navigationRef';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome,MaterialIcons } from '@expo/vector-icons';
 import AutoLogin from './src/screen/AutoLogin';
 import ProductDetailsScreen from './src/screen/ProductDetailsScreen';
 import ProductOptionScreen from './src/screen/ProductOptionScreen';
+import ProfileEditScreen from './src/screen/ProfileEditScreen';
+
 
 
 // const ProductFlow = createStackNavigator({
@@ -24,8 +26,21 @@ import ProductOptionScreen from './src/screen/ProductOptionScreen';
 const HomeScreenFlow = createStackNavigator({
     Home : HomeScreen,
     ProductDetails : ProductDetailsScreen,
-  ProductOption : ProductOptionScreen
+    ProductOption : ProductOptionScreen
 });
+
+const AccountScreenFlow = createStackNavigator({
+  Account : AccountScreen,
+  ProfileEditScreen : ProfileEditScreen
+});
+
+AccountScreenFlow.navigationOptions = ({ navigation }) => {
+  
+  return {
+    title: 'Account',
+    tabBarIcon: <MaterialIcons name="account-circle" size={24} />
+  };
+};
 
 
 
@@ -48,6 +63,8 @@ HomeScreenFlow.navigationOptions = ({ navigation }) => {
   };
 };
 
+
+
 const switchNavigator = createSwitchNavigator({
   AutoLogin : AutoLogin,
   loginFlow: createStackNavigator({
@@ -57,7 +74,7 @@ const switchNavigator = createSwitchNavigator({
   mainFlow: createBottomTabNavigator({
     HomeScreenFlow,
     Cart : CartScreen,
-    Account : AccountScreen
+    AccountScreenFlow
   })
 });
 

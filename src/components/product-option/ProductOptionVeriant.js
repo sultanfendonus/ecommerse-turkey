@@ -22,7 +22,8 @@ const ProductOptionVeriant = ({item, title, name}) => {
             return(
                 <TouchableOpacity onPress={()=>{
                     setSelectedVeriant(item)
-                    setUserChoise(name , item)
+                    let str = item.replace(/\s+/g, ''); //remove all white space from string.
+                    setUserChoise(name , str)
                 }} style = {{borderWidth : 1, borderColor : 'black',padding : 15, marginRight : 5}}>
                 <Text>{item}</Text>
             </TouchableOpacity>

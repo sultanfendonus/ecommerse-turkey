@@ -23,25 +23,35 @@ const ProductOptionScreen = ({navigation}) => {
            }else{
 
 
-                var keys = Object.keys(state.chooseOption).sort();
+            var keys = Object.keys(state.chooseOption).sort();
 
-                console.log(keys)
+            console.log(keys)
 
-                for(i=0; i< Object.keys(state.chooseOption).length; i++){
+            for(i=0; i< Object.keys(state.chooseOption).length; i++){
                     var x = keys[i];
                     if(i===0){
                         string1 = state.chooseOption[x]
                     }else{
                         string1 = string1+"-"+state.chooseOption[x]
-                    }
+                }
                     
 
+                    if(state.chooseColor.color===undefined){
 
+                        //console.log(state.chooseColor.color+"-"+string1)
+                        let filterdText = string1;
+                        
+                        if(singleProduct.variations[filterdText]===undefined){
+                            
+                        }else{
+                            console.log(singleProduct.variations[filterdText])
+                            setfilteredPrice(singleProduct.variations[filterdText].price || singleProduct.discount_price)
+                        }
 
-                    if(state.chooseColor===undefined){
                         
                     }else{
                         console.log(state.chooseColor.color+"-"+string1)
+                    
                         let filterdText = state.chooseColor.color+"-"+string1;
                         
                         if(singleProduct.variations[filterdText]===undefined){
@@ -59,6 +69,17 @@ const ProductOptionScreen = ({navigation}) => {
         
     })
 
+
+    const colorPanelDisplayDiscionMaker = ()=>{
+        if(singleProduct.colors.length>0){
+            return( 
+            <ProductOptionColors 
+                colors = {singleProduct.colors}
+            />
+            )
+        }
+    }
+
     return (
         <View style={styles.container}>
                 <ProductOptionTitleAndEstPrice
@@ -68,10 +89,9 @@ const ProductOptionScreen = ({navigation}) => {
                 />
 
                 <ScrollView>
-                    
-                    <ProductOptionColors 
-                        colors = {singleProduct.colors}
-                    />
+                    {colorPanelDisplayDiscionMaker()}
+
+                   
                     
                     {singleProduct.choice_options.map((value, index) => {
                         //console.log(value.options);

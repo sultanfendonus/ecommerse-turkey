@@ -3,7 +3,7 @@ import { View, Text , SafeAreaView, StyleSheet, Platform } from 'react-native'
 import { Button } from 'react-native-elements';
 import { Context } from '../context/AuthContext';
 
-const AccountScreen = () => {
+const AccountScreen = ({navigation}) => {
     const { signOut } = useContext(Context);
 
     return (
@@ -11,6 +11,11 @@ const AccountScreen = () => {
             <Button
                 onPress = {()=>signOut()}
                 title="Sign Out"
+            />
+
+        <Button
+                onPress = {()=>navigation.navigate('ProfileEditScreen')}
+                title="Profile Update"
             />
 
         </SafeAreaView>

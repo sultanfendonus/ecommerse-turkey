@@ -13,7 +13,7 @@ const ProductOptionQuantity = () => {
             <View style = {{flexDirection : 'row', margin : 5}}>
 
                 {/* Here I used Ternary operator . I use the coditon so that quantityValue naver been a negative value. */}
-                <TouchableOpacity onPress={()=>setQuantityValue(quantityValue===0 ? quantityValue : quantityValue-1)}>
+                <TouchableOpacity onPress={()=>setQuantityValue(quantityValue===1 ? quantityValue : quantityValue-1)}>
                     <AntDesign name="minuscircleo" style={styles.iconStyle} />
                 </TouchableOpacity>
 
