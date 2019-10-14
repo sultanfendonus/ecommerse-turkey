@@ -10,6 +10,7 @@ import CartScreen from './src/screen/CartScreen';
 import AccountScreen from './src/screen/AccountScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as HomeProvider } from './src/context/HomeContext';
+import { Provider as AccountProvider } from './src/context/AccountContext';
 import { setNavigator } from './src/navigationRef';
 import { FontAwesome,MaterialIcons } from '@expo/vector-icons';
 import AutoLogin from './src/screen/AutoLogin';
@@ -82,15 +83,18 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <HomeProvider>
-      <AuthProvider>
-          <App
-            ref={navigator => {
-              setNavigator(navigator);
-            }}
-          />
-        </AuthProvider>
-    </HomeProvider>
+    <AccountProvider>
+      <HomeProvider>
+        <AuthProvider>
+            <App
+              ref={navigator => {
+                setNavigator(navigator);
+              }}
+            />
+          </AuthProvider>
+      </HomeProvider>
+    </AccountProvider>
+    
         
   );
 };

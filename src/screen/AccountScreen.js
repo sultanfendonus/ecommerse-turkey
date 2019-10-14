@@ -1,10 +1,16 @@
-import React, {useContext} from 'react'
+import React, {useContext,useEffect} from 'react'
 import { View, Text , SafeAreaView, StyleSheet, Platform } from 'react-native'
 import { Button } from 'react-native-elements';
-import { Context } from '../context/AuthContext';
+import { Context as AuthContext } from '../context/AuthContext';
+import {Context as AccountContext} from '../context/AccountContext'
 
 const AccountScreen = ({navigation}) => {
-    const { signOut } = useContext(Context);
+    const { state, signOut } = useContext(AuthContext);
+    const { getUserProfile } = useContext(AccountContext);
+
+    useEffect(()=>{
+        getUserProfile({email : state.email, api_token : state.token})
+    },[])
 
     return (
         <SafeAreaView style={styles.droidSafeArea}>
