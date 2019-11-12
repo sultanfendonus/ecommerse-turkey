@@ -17,6 +17,7 @@ import AutoLogin from './src/screen/AutoLogin';
 import ProductDetailsScreen from './src/screen/ProductDetailsScreen';
 import ProductOptionScreen from './src/screen/ProductOptionScreen';
 import ProfileEditScreen from './src/screen/ProfileEditScreen';
+import OrderConfirmationScreen from './src/screen/OrderConfirmationScreen';
 
 
 
@@ -27,7 +28,8 @@ import ProfileEditScreen from './src/screen/ProfileEditScreen';
 const HomeScreenFlow = createStackNavigator({
     Home : HomeScreen,
     ProductDetails : ProductDetailsScreen,
-    ProductOption : ProductOptionScreen
+    ProductOption : ProductOptionScreen,
+    
 });
 
 const AccountScreenFlow = createStackNavigator({
@@ -67,6 +69,7 @@ HomeScreenFlow.navigationOptions = ({ navigation }) => {
 
 
 const switchNavigator = createSwitchNavigator({
+  OrderConfirm: OrderConfirmationScreen,
   AutoLogin : AutoLogin,
   loginFlow: createStackNavigator({
     SignIn : SignIn,

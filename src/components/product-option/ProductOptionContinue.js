@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-const ProductOptionContinue = () => {
+const ProductOptionContinue = ({navigation, isNextPageEnable}) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity onPress={()=>isNextPageEnable===true ? navigation.navigate('OrderConfirm'):alert('You Can not go next Page until choose Options!')} style={styles.container}>
             <Text style={styles.continueText}>Continue</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 
