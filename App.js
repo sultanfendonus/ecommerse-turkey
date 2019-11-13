@@ -29,7 +29,7 @@ const HomeScreenFlow = createStackNavigator({
     Home : HomeScreen,
     ProductDetails : ProductDetailsScreen,
     ProductOption : ProductOptionScreen,
-    
+    OrderConfirm: OrderConfirmationScreen,
 });
 
 const AccountScreenFlow = createStackNavigator({
@@ -69,7 +69,7 @@ HomeScreenFlow.navigationOptions = ({ navigation }) => {
 
 
 const switchNavigator = createSwitchNavigator({
-  OrderConfirm: OrderConfirmationScreen,
+  
   AutoLogin : AutoLogin,
   loginFlow: createStackNavigator({
     SignIn : SignIn,

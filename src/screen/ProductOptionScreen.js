@@ -112,10 +112,10 @@ const ProductOptionScreen = ({navigation}) => {
                     <ProductOptionQuantity />
             </ScrollView>
 
-                <ProductOptionContinue 
+                <ProductOptionContinue
                     navigation={navigation}
                     isNextPageEnable = {readyToNextPage}
-                
+                    btnText = "Continue"
                 />
                 
                 
