@@ -5,12 +5,8 @@ import { Context as AuthContext } from '../context/AuthContext';
 import {Context as AccountContext} from '../context/AccountContext'
 
 const AccountScreen = ({navigation}) => {
-    const { state, signOut } = useContext(AuthContext);
-    const { getUserProfile } = useContext(AccountContext);
+    const { signOut } = useContext(AuthContext);
 
-    useEffect(()=>{
-        getUserProfile({email : state.email, api_token : state.token})
-    },[])
 
     return (
         <SafeAreaView style={styles.droidSafeArea}>

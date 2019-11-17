@@ -31,7 +31,7 @@ const getUserProfile = dispatch => async (auth) => {
 const setUserProfile = dispatch => async (auth,userProfile,callback) => {
     try {
         const response = await shopApi.post('/user/update',{email : auth.email, api_token : auth.api_token, name : userProfile.name,address : userProfile.address, country : userProfile.country,city : userProfile.city,postal_code : userProfile.postal_code, phone : userProfile.phone})
-        console.log(response.data);
+        //console.log(response.data);
         //dispatch({type : 'get_profile',payload : response.data})
         if(response.data.code === 201){
             alert("Profile Updated!")

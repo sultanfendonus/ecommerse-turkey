@@ -30,11 +30,14 @@ const HomeScreenFlow = createStackNavigator({
     ProductDetails : ProductDetailsScreen,
     ProductOption : ProductOptionScreen,
     OrderConfirm: OrderConfirmationScreen,
+    // Though ProfileEditScreen should place in AccountScreenFlow but I put it here because 
+    // I reuse the screen when someone update shipping info from Order Confirmations.
+    ProfileEditScreen : ProfileEditScreen
 });
 
 const AccountScreenFlow = createStackNavigator({
   Account : AccountScreen,
-  ProfileEditScreen : ProfileEditScreen
+ 
 });
 
 AccountScreenFlow.navigationOptions = ({ navigation }) => {

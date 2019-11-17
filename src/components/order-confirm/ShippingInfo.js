@@ -1,23 +1,26 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 
-const ShippingInfo = () => {
+const ShippingInfo = ({userProfile, navigation}) => {
+    
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}
+            onPress={()=>navigation.navigate('ProfileEditScreen')}
+        >
             <Feather style={{margin: 10,}} name="map-pin" size={35} />
             <View style={styles.adressbar}>
-                <Text style={{fontWeight: 'bold'}}>Md. Sultann Mahamud</Text>
-                <Text numberOfLines={2}>23/4, Katasur , Sheree banglafssfdsfgsd banglafssfdsfgsdbanglafssfdsfgsdbanglafssfdsfgsd</Text>
-                <Text style={{paddingVertical: 3}}>Dhaka, Bogra</Text>
-                <Text>1207</Text>
-                <Text style={{paddingVertical: 3}} >01723019985</Text>
+                <Text style={{fontWeight: 'bold'}}>{userProfile.name}</Text>
+                <Text numberOfLines={2}>{userProfile.address}</Text>
+                <Text style={{paddingVertical: 3}}>{userProfile.city}</Text>
+                <Text>{userProfile.postal_code}</Text>
+                <Text style={{paddingVertical: 3}} >{userProfile.phone}</Text>
             </View>
             
             <MaterialIcons style={{marginRight: 10,alignSelf: 'center',}} name="navigate-next" size={35} />
             
             
-        </View>
+        </TouchableOpacity>
     )
 }
 

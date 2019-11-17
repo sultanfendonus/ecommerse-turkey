@@ -17,7 +17,7 @@ export default class BrandLogoPicker extends React.Component {
       <View style={{ alignItems: 'center', }}>
         <TouchableOpacity
           onPress={this._pickImage}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'blue', alignItems: 'center',}}>Pick an Image for yor brand logo</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'blue', alignItems: 'center',}}>Pick an Image for your brand logo</Text>
         </TouchableOpacity>
         {image &&
           <Image source={{ uri: image }} style={{ width: 80, height: 80 , margin: 10}} />}
@@ -48,6 +48,7 @@ export default class BrandLogoPicker extends React.Component {
     });
 
     console.log(result);
+    
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
