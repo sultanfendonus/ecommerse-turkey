@@ -9,25 +9,33 @@ const AccountScreen = ({navigation}) => {
 
 
     return (
-        <SafeAreaView style={styles.droidSafeArea}>
+        <SafeAreaView style={styles.container}>
+
             <Button
+                    onPress = {()=>navigation.navigate('ProfileEditScreen')}
+                    title="Profile Update"
+                />
+
+            <Button
+                buttonStyle={{backgroundColor: 'red'}}
+                backgroundColor = {'red'}
                 onPress = {()=>signOut()}
                 title="Sign Out"
-            />
-
-        <Button
-                onPress = {()=>navigation.navigate('ProfileEditScreen')}
-                title="Profile Update"
             />
 
         </SafeAreaView>
     )
 }
 
+AccountScreen.navigationOptions = {
+    title: 'Account'
+}
+
 const styles = StyleSheet.create({
-    droidSafeArea: {
+    container: {
         flex: 1,
-        paddingTop: Platform.OS === 'android' ? 35 : 0
+        justifyContent: 'space-between'
+        
     },
 })
 

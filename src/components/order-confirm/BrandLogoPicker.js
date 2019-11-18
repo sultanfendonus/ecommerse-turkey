@@ -1,36 +1,26 @@
-import * as React from 'react';
+import  React,{useEffect, useState, useContext} from 'react';
 import { Button, Image, View,Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default class BrandLogoPicker extends React.Component {
-  state = {
-    image: null,
-  };
+import {Context as HomeContext} from '../../context/HomeContext'
+import { Context as AuthContext } from '../../context/AuthContext';
 
-  render() {
-    let { image } = this.state;
+const BrandLogoPicker = () => {
 
-    return (
-      <View style={{ alignItems: 'center', }}>
-        <TouchableOpacity
-          onPress={this._pickImage}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'blue', alignItems: 'center',}}>Pick an Image for your brand logo</Text>
-        </TouchableOpacity>
-        {image &&
-          <Image source={{ uri: image }} style={{ width: 80, height: 80 , margin: 10}} />}
-      </View>
-    );
-  }
+  const { state } = useContext(AuthContext);
+  const {saveBrandImage} = useContext(HomeContext);
+  const [image, setImage] = useState(null);
 
-  componentDidMount() {
-    this.getPermissionAsync();
-    console.log('hi');
-  }
+  useEffect(() => {
+    getPermissionAsync();
+  })
 
-  getPermissionAsync = async () => {
+
+  
+  const getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
@@ -39,7 +29,7 @@ export default class BrandLogoPicker extends React.Component {
     }
   }
 
-  _pickImage = async () => {
+   const _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -51,7 +41,23 @@ export default class BrandLogoPicker extends React.Component {
     
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      setImage( result.uri )
+      saveBrandImage({email : state.email, api_token : state.token},result)
     }
   };
+ 
+
+    return (
+      <View style={{ alignItems: 'center', }}>
+        <TouchableOpacity
+          onPress={()=>_pickImage()}>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'blue', alignItems: 'center',}}>Pick an Image for your brand logo</Text>
+        </TouchableOpacity>
+        {image &&
+          <Image source={{ uri: image }} style={{ width: 80, height: 80 , margin: 10}} />}
+      </View>
+    )
+  
 }
+
+export default BrandLogoPicker;

@@ -21,6 +21,9 @@ const homeReducer = (state, action) => {
      case 'clear_choose' : 
      return {...state, chooseOption : action.payload, chooseColor : action.payload};
 
+     case 'brand_image' : 
+     return {...state, brandImage : action.payload};
+
     default:
       return state;
   }
@@ -70,10 +73,32 @@ const getAllProducts = dispatch => async (auth) => {
     dispatch({type : 'clear_choose', payload : {}})
   }
 
+  const saveBrandImage = dispatch => async (image) => {
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    let data = new FormData();
+
+    data.append("logo", {
+        uri: image.uri,
+        name: "filename",
+        type: "image/jpeg"
+      });
+
+    try {
+      const response = await shopApi.post('/order/upload-logo',data, config)
+      dispatch({type : 'brand_image', payload : {serverUrl: response.data}})
+
+      } catch (err) {
+          console.log(err);
+          
+      }
+    
+  }
+
+
 
 
 export const { Provider, Context } = createDataContext(
   homeReducer,
-  { getAllProducts, getSingleProductWithDescriptions, setUserChoise, setUserChoiseColor,clearChoose },
-  { products : [], singleProduct : null, chooseOption : null, chooseColor : null }
+  { getAllProducts, getSingleProductWithDescriptions, setUserChoise, setUserChoiseColor,clearChoose, saveBrandImage },
+  { products : [], singleProduct : null, chooseOption : null, chooseColor : null, brandImage: null }
 );

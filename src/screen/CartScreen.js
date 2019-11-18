@@ -9,4 +9,8 @@ const CartScreen = () => {
     )
 }
 
+CartScreen.navigationOptions = {
+    title: 'Cart'
+}
+
 export default CartScreen

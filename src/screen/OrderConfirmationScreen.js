@@ -10,11 +10,13 @@ import ProductOptionContinue from '../components/product-option/ProductOptionCon
 
 import { Context as AuthContext } from '../context/AuthContext';
 import {Context as AccountContext} from '../context/AccountContext'
+//import {Context as HomeContext} from '../context/HomeContext'
 
 const OrderConfirmationScreen = (props) => {
     const { state } = useContext(AuthContext);
     const {state:{userProfile} } = useContext(AccountContext);
     const { getUserProfile } = useContext(AccountContext);
+    //const {state:{brandImage} } = useContext(HomeContext);
 
     // useEffect(()=>{
     //     console.log(userProfile)
@@ -25,19 +27,21 @@ const OrderConfirmationScreen = (props) => {
         'didFocus',
         payload => {
             getUserProfile({email : state.email, api_token : state.token})
+            
         }
       );
 
     return (
         <ScrollView style={{margin: 5}}>
             <ShippingInfo userProfile={userProfile} navigation={props.navigation}/>
+            <ConfirmProductList />
+            
             <TouchableOpacity style = {styles.delivaryOption}>
                 <MaterialCommunityIcons name="radiobox-marked" style={{fontSize: 30,}} />
                 <Text style={{fontSize: 20, marginTop: 3}}>Cash On Delivery</Text>
             </TouchableOpacity>
-            <OrderNote />
             <BrandLogoPicker />
-            <ConfirmProductList />
+            <OrderNote />
             <ProductOptionContinue 
                 btnText = "Confirm Order"
                 isNextPageEnable = {true}

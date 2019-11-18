@@ -35,21 +35,6 @@ const HomeScreenFlow = createStackNavigator({
     ProfileEditScreen : ProfileEditScreen
 });
 
-const AccountScreenFlow = createStackNavigator({
-  Account : AccountScreen,
- 
-});
-
-AccountScreenFlow.navigationOptions = ({ navigation }) => {
-  
-  return {
-    title: 'Account',
-    tabBarIcon: <MaterialIcons name="account-circle" size={24} />
-  };
-};
-
-
-
 HomeScreenFlow.navigationOptions = ({ navigation }) => {
   let tabBarVisible;
   if (navigation.state.routes.length > 1) {
@@ -70,6 +55,30 @@ HomeScreenFlow.navigationOptions = ({ navigation }) => {
 };
 
 
+const AccountScreenFlow = createStackNavigator({
+  Account : AccountScreen,
+ 
+});
+
+AccountScreenFlow.navigationOptions = ({ navigation }) => {
+  
+  return {
+    title: 'Account',
+    tabBarIcon: <MaterialIcons name="account-circle" size={24} />
+  };
+};
+
+const CartScreenFlow = createStackNavigator({
+  Cart : CartScreen
+})
+
+CartScreenFlow.navigationOptions = ({navigation}) =>{
+  return{
+    title: 'Cart',
+    tabBarIcon: <FontAwesome name="cart-plus" size={24} />
+  }
+}
+
 
 const switchNavigator = createSwitchNavigator({
   
@@ -80,7 +89,7 @@ const switchNavigator = createSwitchNavigator({
   }),
   mainFlow: createBottomTabNavigator({
     HomeScreenFlow,
-    Cart : CartScreen,
+    CartScreenFlow,
     AccountScreenFlow
   })
 });
