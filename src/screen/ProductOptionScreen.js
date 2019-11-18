@@ -6,17 +6,23 @@ import ProductOptionVeriant from '../components/product-option/ProductOptionVeri
 import ProductOptionQuantity from '../components/product-option/ProductOptionQuantity'
 import ProductOptionContinue from '../components/product-option/ProductOptionContinue'
 import { Context as HomeContext } from '../context/HomeContext';
+import { Context as CartContext } from '../context/CartContext';
+
 
 const ProductOptionScreen = ({navigation}) => {
     const singleProduct = navigation.getParam('singleProduct')
+    const action = navigation.getParam('action')
     const [filteredPrice,setfilteredPrice] = useState(singleProduct.discount_price)
     const [readyToNextPage, setReadyToNextPage] = useState(false);
     const { state } = useContext(HomeContext);
+    const { state:{Cart} } = useContext(CartContext);
 
     let string1 = "";
 
     useEffect(()=>{
- 
+
+        console.log(Cart)
+        
            if(state.chooseOption===undefined){
            }else{
 
@@ -89,6 +95,28 @@ const ProductOptionScreen = ({navigation}) => {
         }
     }
 
+    const buyOrCartDesitionMaker = ()=>{
+        if(action==='buy'){
+            return(
+                <ProductOptionContinue
+                    navigation={navigation}
+                    isNextPageEnable = {readyToNextPage}
+                    btnText = "Continue"
+                    action = 'buy'
+                />
+            )
+        }else{
+            return(
+                <ProductOptionContinue
+                    navigation={navigation}
+                    isNextPageEnable = {readyToNextPage}
+                    btnText = "Add to Cart"
+                    action = "cart"
+                />
+            )
+        }
+    }
+
     return (
         <View style={styles.container}>
                 <ProductOptionTitleAndEstPrice
@@ -111,12 +139,9 @@ const ProductOptionScreen = ({navigation}) => {
 
                     <ProductOptionQuantity />
             </ScrollView>
+            {buyOrCartDesitionMaker()}
 
-                <ProductOptionContinue
-                    navigation={navigation}
-                    isNextPageEnable = {readyToNextPage}
-                    btnText = "Continue"
-                />
+                
                 
                 
         </View>

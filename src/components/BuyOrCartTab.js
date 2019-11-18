@@ -4,12 +4,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 const BuyOrCartTab = ({navigation,singleProduct}) => {
     return (
         <View style={styles.container}>
-            <View style={styles.cart}>
+            <TouchableOpacity onPress={()=>navigation.navigate('ProductOption',{singleProduct, action:'cart'})} style={styles.cart}>
                 <Text style = {styles.cartText}>Add To Cart</Text>
 
-            </View>
+            </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=>navigation.navigate('ProductOption',{singleProduct})} style={styles.buy}>
+            <TouchableOpacity onPress={()=>navigation.navigate('ProductOption',{singleProduct, action:'buy'})} style={styles.buy}>
                 <Text style = {styles.buyText}>Buy Now</Text>
 
             </TouchableOpacity>

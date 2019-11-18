@@ -7,21 +7,13 @@ import OrderNote from '../components/order-confirm/OrderNote'
 import BrandLogoPicker from '../components/order-confirm/BrandLogoPicker'
 import { ScrollView } from 'react-native-gesture-handler'
 import ProductOptionContinue from '../components/product-option/ProductOptionContinue'
-
 import { Context as AuthContext } from '../context/AuthContext';
 import {Context as AccountContext} from '../context/AccountContext'
-//import {Context as HomeContext} from '../context/HomeContext'
 
 const OrderConfirmationScreen = (props) => {
     const { state } = useContext(AuthContext);
     const {state:{userProfile} } = useContext(AccountContext);
     const { getUserProfile } = useContext(AccountContext);
-    //const {state:{brandImage} } = useContext(HomeContext);
-
-    // useEffect(()=>{
-    //     console.log(userProfile)
-    // })
-
 
     const didFocusSubscriptions = props.navigation.addListener(
         'didFocus',
