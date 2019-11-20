@@ -10,18 +10,20 @@ import { Context as CartContext } from '../context/CartContext';
 
 
 const ProductOptionScreen = ({navigation}) => {
-    const singleProduct = navigation.getParam('singleProduct')
-    const action = navigation.getParam('action')
-    const [filteredPrice,setfilteredPrice] = useState(singleProduct.discount_price)
+    const singleProduct = navigation.getParam('singleProduct');
+    const action = navigation.getParam('action');
+    const [filteredPrice,setfilteredPrice] = useState(singleProduct.discount_price);
+    const [variations, setVariations] = useState('');
+    const [quantity,setQuantity] = useState(1);
     const [readyToNextPage, setReadyToNextPage] = useState(false);
     const { state } = useContext(HomeContext);
-    const { state:{Cart} } = useContext(CartContext);
+    const { state:{buyCart},getCart } = useContext(CartContext);
+    
 
     let string1 = "";
 
     useEffect(()=>{
-
-        console.log(Cart)
+        //console.log(buyCart)
         
            if(state.chooseOption===undefined){
            }else{
@@ -49,7 +51,7 @@ const ProductOptionScreen = ({navigation}) => {
 
                             //call Ready to next page changer function
                             readyToNextPageValueChanger(singleProduct.variations[filterdText].price)
-                            
+                            setVariations(filterdText)
                         }
 
                         
@@ -65,7 +67,7 @@ const ProductOptionScreen = ({navigation}) => {
 
                             //call Ready to next page changer function
                             readyToNextPageValueChanger(singleProduct.variations[filterdText].price)
-                            
+                            setVariations(filterdText)
                         }
 
                         
@@ -96,6 +98,7 @@ const ProductOptionScreen = ({navigation}) => {
     }
 
     const buyOrCartDesitionMaker = ()=>{
+        const Items = {"product_id":singleProduct.id, "variation":variations, "quantity":quantity}
         if(action==='buy'){
             return(
                 <ProductOptionContinue
@@ -103,6 +106,8 @@ const ProductOptionScreen = ({navigation}) => {
                     isNextPageEnable = {readyToNextPage}
                     btnText = "Continue"
                     action = 'buy'
+                    Items = {Items}
+                   
                 />
             )
         }else{
@@ -137,7 +142,7 @@ const ProductOptionScreen = ({navigation}) => {
                         </View> 
                     })}
 
-                    <ProductOptionQuantity />
+                    <ProductOptionQuantity value={setQuantity} />
             </ScrollView>
             {buyOrCartDesitionMaker()}
 

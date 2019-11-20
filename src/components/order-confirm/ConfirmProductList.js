@@ -1,25 +1,34 @@
 import React,{useState} from 'react'
-import { View, Text, StyleSheet,Image,TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet,Image,TouchableOpacity,FlatList } from 'react-native'
 import {AntDesign} from '@expo/vector-icons'
 
 
-const ConfirmProductList = () => {
+const ConfirmProductList = ({Items}) => {
     const [quantityValue,setQuantityValue] = useState(1)
     return (
-        <View style={styles.container}>
+        <View style={styles.MainContainer}>
+      
+      <FlatList
+        contentContainerStyle = {styles.flatlist}
+        data={Items}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => {
+            console.log(item)
+          return (
+            <View style={styles.container}>
             <View>
             <Image
                 style={styles.image}
-                source={{uri : "https://image.cnbcfm.com/api/v1/image/105992231-1561667465295gettyimages-521697453.jpeg"}}
+                source={{uri : item[index].featured_img}}
                 />
             </View>
             <View style={styles.titleAndPriceContainer}>
                 <View style={{flex:1}}>
-                    <Text style = {styles.title} numberOfLines = {2}>Dogs is the Prooducts, Dogs is the products, Dogs hu Dogs gu hfghkshhk hfhhjh</Text>
-                    <Text style = {styles.price}>US 250</Text>
+                    <Text style = {styles.title} numberOfLines = {2}>{item[index].name}</Text>
+                    <Text style = {styles.price}>US {item[index].price}</Text>
                 </View>
 
-                <Text style={{fontSize: 10, color: '#B0BEC5',}}>Silver, Black, Watch</Text>
+                <Text style={{fontSize: 10, color: '#B0BEC5',}}>{item[index].sku}</Text>
 
             </View>
             <View style={{alignSelf:'center', flexDirection: "row",marginRight:5}}>
@@ -28,13 +37,18 @@ const ConfirmProductList = () => {
                     <AntDesign name="minuscircleo" style={styles.iconStyle} />
                 </TouchableOpacity>
 
-                <Text style = {{fontSize : 20, paddingHorizontal:10}}>{quantityValue}</Text>
+                <Text style = {{fontSize : 20, paddingHorizontal:10}}>{item[index].quantity}</Text>
 
                 <TouchableOpacity onPress={()=>setQuantityValue(quantityValue+1)}>
                     <AntDesign name="pluscircleo" style={styles.iconStyle} />
                 </TouchableOpacity>
             </View>
         </View>
+          );
+        }}
+      />
+    </View>
+        
     )
 }
 
@@ -78,7 +92,18 @@ const styles = StyleSheet.create({
     iconStyle:{
         fontSize: 25,
         alignSelf: 'center',
-    }
+    },
+    flatlist : {
+        paddingTop: 5
+      },
+
+    MainContainer:{
+        flexDirection : "row",
+        justifyContent : 'space-between',
+        // borderWidth : 5,
+        // borderColor : 'blue',
+        flex: 2,
+    },
 })
 
 export default ConfirmProductList

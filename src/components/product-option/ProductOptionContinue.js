@@ -2,15 +2,16 @@ import React, { useContext } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import {Context as CartContext} from '../../context/CartContext'
 
-const ProductOptionContinue = ({navigation, isNextPageEnable, btnText,action}) => {
+const ProductOptionContinue = ({navigation, isNextPageEnable, btnText,action,Items}) => {
 
-    const {addToCart} = useContext(CartContext);
+    const {addToCart, directBuyCart} = useContext(CartContext);
 
     const nextPage = ()=>{
         if(isNextPageEnable === true && action ==='buy'){
+            directBuyCart(Items)
             navigation.navigate('OrderConfirm')
         }else if(isNextPageEnable === true && action ==='cart'){
-            addToCart({apple: 'fruits of king'})
+            //addToCart('fruits of king')
         }else {
             alert('You Can not go next Page until choose Options!')
         }
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF3D00',
         justifyContent: "center",
         alignItems:"center",
+        marginTop: 5
         
     },
     continueText : {

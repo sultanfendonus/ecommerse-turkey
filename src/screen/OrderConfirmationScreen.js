@@ -9,11 +9,17 @@ import { ScrollView } from 'react-native-gesture-handler'
 import ProductOptionContinue from '../components/product-option/ProductOptionContinue'
 import { Context as AuthContext } from '../context/AuthContext';
 import {Context as AccountContext} from '../context/AccountContext'
+import {Context as CartContext} from '../context/CartContext'
 
 const OrderConfirmationScreen = (props) => {
     const { state } = useContext(AuthContext);
     const {state:{userProfile} } = useContext(AccountContext);
     const { getUserProfile } = useContext(AccountContext);
+    const {state:{buyCart,detailsCart},getBuyCartDetails} = useContext(CartContext);
+
+    useEffect(() => {
+        getBuyCartDetails(buyCart);
+    }, [])
 
     const didFocusSubscriptions = props.navigation.addListener(
         'didFocus',
@@ -26,7 +32,7 @@ const OrderConfirmationScreen = (props) => {
     return (
         <ScrollView style={{margin: 5}}>
             <ShippingInfo userProfile={userProfile} navigation={props.navigation}/>
-            <ConfirmProductList />
+            <ConfirmProductList Items = {detailsCart}/>
             
             <TouchableOpacity style = {styles.delivaryOption}>
                 <MaterialCommunityIcons name="radiobox-marked" style={{fontSize: 30,}} />

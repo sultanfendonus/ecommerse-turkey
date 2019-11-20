@@ -2,10 +2,12 @@ import React,{useState} from 'react'
 import { View, Text, StyleSheet,TouchableOpacity,Image } from 'react-native'
 import {AntDesign} from '@expo/vector-icons'
 
-const ProductOptionQuantity = () => {
+const ProductOptionQuantity = ({value}) => {
 
     const [quantityValue,setQuantityValue] = useState(1)
 
+    value(quantityValue);
+    
     return (
         <View>
             <Text style = {styles.mainTitle}>Quantity : </Text>
